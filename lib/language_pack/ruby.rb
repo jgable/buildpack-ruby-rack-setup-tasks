@@ -811,7 +811,7 @@ params = CGI.parse(uri.query || "")
   def run_rake_task(name)
     instrument 'ruby.run_rake_task' do
 
-      task_to_run = rake.task("i18n:js:export")
+      task_to_run = rake.task(name)
       return true unless task_to_run.is_defined?
 
       topic "Running 'rake #{name}'"
