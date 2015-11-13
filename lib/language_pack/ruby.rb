@@ -100,9 +100,11 @@ WARNING
         install_bundler_in_app
         build_bundler
         post_bundler
-        create_database_yml
+        # create_database_yml
         install_binaries
-        run_assets_precompile_rake_task
+        # run_assets_precompile_rake_task
+        # TODO: Split SETUP_TASKS into array and run_rake_task for each
+        run_i18n_js_export_task
       end
       best_practice_warnings
       super
@@ -800,6 +802,36 @@ params = CGI.parse(uri.query || "")
         precompile_fail(precompile.output)
       end
     end
+  end
+
+  def run_i18n_js_export_task
+    run_rake_task('i18n:js:export')
+  end
+
+  def run_rake_task(name)
+    instrument 'ruby.run_rake_task' do
+
+      task_to_run = rake.task("i18n:js:export")
+      return true unless task_to_run.is_defined?
+
+      topic "Running 'rake #{name}'"
+      task_to_run.invoke(env: rake_env)
+      if task_to_run.success?
+        puts "'rake #{name}' completed (#{"%.2f" % task_to_run.time}s)"
+      else
+        task_fail(name, task_to_run.output)
+      end
+    end
+  end
+
+  def task_fail(name, output) do
+    log name, :status => "failure"
+    msg = "#{name} task failed.\n"
+    if output.match(/(127\.0\.0\.1)|(org\.postgresql\.util)/)
+      msg << "Attempted to access a nonexistent database:\n"
+      msg << "https://devcenter.heroku.com/articles/pre-provision-database\n"
+    end
+    error msg
   end
 
   def precompile_fail(output)
