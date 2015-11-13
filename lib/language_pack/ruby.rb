@@ -824,7 +824,7 @@ params = CGI.parse(uri.query || "")
     end
   end
 
-  def task_fail(name, output) do
+  def task_fail(name, output)
     log name, :status => "failure"
     msg = "#{name} task failed.\n"
     if output.match(/(127\.0\.0\.1)|(org\.postgresql\.util)/)
