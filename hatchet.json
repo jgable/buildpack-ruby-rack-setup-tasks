@@ -14,10 +14,12 @@
   ],
   "bundler": [
     "sharpstone/bad_gemfile_on_platform",
+    "sharpstone/problem_gemfile_version",
     "sharpstone/git_gemspec",
     "sharpstone/no_lockfile",
     "sharpstone/sqlite3_gemfile",
-    "sharpstone/nokogiri_160"
+    "sharpstone/nokogiri_160",
+    "sharpstone/bundle-ruby-version-not-in-lockfile"
   ],
   "ruby": [
     "sharpstone/mri_187",
@@ -27,6 +29,7 @@
     "sharpstone/ruby_193_jruby_17161",
     "sharpstone/ruby_193_jruby_17161_jdk7",
     "sharpstone/ruby_193_jruby_17161_jdk8",
+    "sharpstone/ruby_193_bad_patch_cedar_14",
     "sharpstone/jruby-minimal",
     "sharpstone/empty-procfile",
     "sharpstone/bad_ruby_version",
@@ -49,12 +52,15 @@
     "sharpstone/rails3_12factor",
     "sharpstone/rails3_one_plugin",
     "sharpstone/rails3_runtime_assets",
-    "sharpstone/rails3-fail-assets-compile"
+    "sharpstone/rails3-fail-assets-compile",
+    "sharpstone/rails3-fail-rakefile"
+
   ],
   "rails4": [
     "sharpstone/rails4-manifest",
     "sharpstone/rails3-to-4-no-bin",
     "sharpstone/rails4_windows_mri193",
+    "sharpstone/rails4-env-assets-compile",
     "sharpstone/rails4-fail-assets-compile"
   ],
   "rails41": [
@@ -66,6 +72,9 @@
   ],
   "rails5": [
     "sharpstone/rails5"
+  ],
+  "rails51": [
+    "schneems/rails51_webpacker"
   ],
   "multibuildpack": [
     "sharpstone/node_multi"
